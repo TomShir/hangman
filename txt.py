@@ -124,8 +124,8 @@ else:
                       break
                   else:
                       pass
-              else:
-                  if guess_letter_input==word_list[index]:
+              
+              if guess_letter_input==word_list[index]:
                     for letter in underscore_list:
                         if letter==underscore_list[index]:
                             underscore_list.remove(letter)
@@ -134,7 +134,7 @@ else:
                             pass 
                         
                     create_dash_line()
-                  else:
+              else:
                       incorrect_inputs_list.append('X')
                       if len(incorrect_inputs_list)==1:
                           print(f'{stick_man_parts[0]}')
