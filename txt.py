@@ -1,8 +1,8 @@
-from colorama import Fore 
-import time 
-import sys 
-import random 
-import os 
+from colorama import Fore
+import time
+import sys
+import random
+import os
 colors=[Fore.RED,Fore.GREEN,Fore.BLUE,Fore.YELLOW,Fore.MAGENTA,Fore.LIGHTMAGENTA_EX,Fore.LIGHTRED_EX,Fore.BLACK,Fore.CYAN,Fore.RESET]
 letters='abcdefghijklmnopqrstuvwxyz'
 incorrect_inputs_list=[]
@@ -16,7 +16,7 @@ stick_man_parts=['''
                     .   .
                   .       .
                 .           .
-              .               .''',''' 
+              .               .''','''
                       .
                       .
                       .
@@ -25,7 +25,7 @@ stick_man_parts=['''
                     .   .
                   .       .
                 .           .
-              .               .''',''' 
+              .               .''','''
                       .
                     . .
                   .   .
@@ -34,18 +34,18 @@ stick_man_parts=['''
                     .   .
                   .       .
                 .           .
-              .               .''',''' 
+              .               .''','''
                       .
                     . . .
                   .   .   .
-                .     .     . 
+                .     .     .
               .       .       .
                     .   .
                   .       .
                 .           .
-              .               .''',''' 
-                      
-                     ◯ 
+              .               .''','''
+
+                     ◯
                       .
                     . . .
                   .   .   .
@@ -60,7 +60,7 @@ for letter in letters:
     letters_list.append(letter)
 else:
     pass
-#Creating a function that takes in a subscriptable sequence and loops over it and prints it horizontially 
+#Creating a function that takes in a subscriptable sequence and loops over it and prints it horizontially
 def loop_over(sequence,color,delay_time):
     for txt in sequence:
         sys.stdout.flush()
@@ -68,7 +68,7 @@ def loop_over(sequence,color,delay_time):
         sys.stdout.write(f'{color}{txt}')
     else:
         print(f'{colors[-1]}')
-        
+
 program_title='hangman'.upper()
 for text in program_title:
     sys.stdout.flush()
@@ -86,12 +86,12 @@ else:
       loop_over(sequence='You did not adhere to the note,please try again',color=colors[0],delay_time=0.1)
       word_input=input('Word:')
       if word_input.lower():
-        break 
+        break
     word_list=[]
     underscore_list=[]
     for letter in word_input:
         word_list.append(letter)
-    else:  
+    else:
      for num in range(len(word_input)):
         underscore_list.append('_')
      else:
@@ -100,9 +100,10 @@ else:
                  print(f'{underscore}',end=' ')
              else:
                  pass
-             
+
          create_dash_line()
          time.sleep(1)
+         os.system("cls")
      try:
         while word_list!=underscore_list:
           select_index=int(input(f'\n\n{Fore.CYAN}Select an index from 0 to {len(word_input)-1}:{colors[-1]}'))
@@ -110,29 +111,29 @@ else:
             loop_over(sequence=f'IndexError,inputted index is not between the range of {0} and {len(word_input)-1}',color=colors[0],delay_time=0.1)
             select_index=int(input(f'\n\n{Fore.CYAN}Select an index from 0 to {len(word_input)-1}:{colors[-1]}'))
             if select_index>=0 and select_index<=len(word_input)-1:
-              break 
+              break
             else:
               pass
           def guess_letter(index):
               guess_letter_input=input('letter:')
               while len(guess_letter_input)>1 or guess_letter_input not in letters_list:
                   time.sleep(1)
-                  loop_over(sequence=f'{guess_letter_input} was not a letter please try again',color=colors[0],delay_time=0.1) 
+                  loop_over(sequence=f'{guess_letter_input} was not a letter please try again',color=colors[0],delay_time=0.1)
                   time.sleep(1)
                   guess_letter_input=input('letter:')
                   if len(guess_letter_input)==1:
                       break
                   else:
                       pass
-              
+
               if guess_letter_input==word_list[index]:
                     for letter in underscore_list:
                         if letter==underscore_list[index]:
                             underscore_list.remove(letter)
                             underscore_list.insert(index,guess_letter_input)
                         else:
-                            pass 
-                        
+                            pass
+
                     create_dash_line()
               else:
                       incorrect_inputs_list.append('X')
